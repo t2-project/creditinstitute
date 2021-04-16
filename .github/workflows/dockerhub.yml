@@ -35,5 +35,5 @@ jobs:
         echo ${{ env.RELEASE_VERSION }}
         echo $RELEASE_VERSION
         cd paymentprovider
-        docker build -t stiesssh/paymentprovider:v0.1.0 .
-        docker push stiesssh/paymentprovider:v0.1.0
+        docker build -t stiesssh/provider:v0.1.0 .
+        docker push stiesssh/provider:v0.1.0
