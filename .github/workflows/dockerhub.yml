@@ -1,0 +1,39 @@
+name: build and push docker image
+on:
+  push:
+    branches: 
+      - 'main'
+#  release:
+#    types: [published]
+jobs:
+  dockerhub:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: check out paymentprovider
+      uses: actions/checkout@v2
+    - name: set up jdk
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+    - name: verify paymentprovider
+      run: mvn clean install
+#
+# that's how cool kids would do their tags:       
+#        docker build -t stiesssh/paymentprovider:${{ env.RELEASE_VERSION }} .
+#        docker push stiesssh/paymentprovider:${{ env.RELEASE_VERSION }}
+    - run: |
+        echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Build and push (manual)
+      run: |
+        echo ${{ env.RELEASE_VERSION }}
+        echo $RELEASE_VERSION
+        cd paymentprovider
+        docker build -t stiesssh/paymentprovider:v0.1.0 .
+        docker push stiesssh/paymentprovider:v0.1.0
