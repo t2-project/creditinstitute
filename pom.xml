@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.unistuttgart.t2</groupId>
-	<artifactId>paymentprovider</artifactId>
+	<artifactId>creditinstitute</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>paymentprovider</name>
-	<description>payment provider for payment</description>
+	<name>creditinstitute</name>
+	<description>credit institute for payment</description>
 	<properties>
 		<java.version>8</java.version>
 	</properties>

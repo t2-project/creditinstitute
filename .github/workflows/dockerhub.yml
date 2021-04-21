@@ -15,14 +15,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: check out paymentprovider
+    - name: check out credit institute
       uses: actions/checkout@v2
     - name: set up jdk
       uses: actions/setup-java@v2
       with:
         distribution: 'adopt'
         java-version: '11'
-    - name: verify paymentprovider
+    - name: verify credit institute
       run: mvn clean install
 #
 # that's how cool kids would do their tags:       
