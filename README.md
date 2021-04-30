@@ -8,8 +8,8 @@ takes credit card info and the total amount of money and pretends to perform pay
 ## endpoints
 
 * ``/timeout/{timeout}`` GET to set the request delay to ``timeout`` (in ms)
-* ``/failurerate/{rate}`` GET to set failurerate to ``rate``
-* ``/timeoutrate/{rate}`` GET to set timeoutrate to ``rate``
+* ``/failurerate/{rate}`` GET to set failurerate to ``rate`` (as decimal)
+* ``/timeoutrate/{rate}`` GET to set timeoutrate to ``rate`` (as decimal)
 * ``/pay`` POST to execute some payment
 
 
