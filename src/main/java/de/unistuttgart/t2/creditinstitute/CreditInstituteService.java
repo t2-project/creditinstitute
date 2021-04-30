@@ -35,8 +35,8 @@ public class CreditInstituteService {
 
 	private int timeout = 1000; // in ms
 	
-	private double failurerate = 0.1; // percent
-	private double timeoutrate = 0.1; // percent
+	private double failurerate = 0.1; // decimals
+	private double timeoutrate = 0.1; // decimals 
 	
 
 	public void doPayment(PaymentData data) throws Exception {
