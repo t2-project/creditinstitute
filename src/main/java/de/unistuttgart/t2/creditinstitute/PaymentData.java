@@ -1,4 +1,4 @@
-package de.unistuttgart.t2.payment.provider;
+package de.unistuttgart.t2.creditinstitute;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
