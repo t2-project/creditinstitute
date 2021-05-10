@@ -11,8 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * i don't know how to test for delay, but let's at least call every op once.
- * 
+ * Tests for the {@link de.unistuttgart.t2.creditinstitute.CreditInstituteService CreditInstituteService}.
  * 
  * @author maumau
  *
@@ -32,7 +31,7 @@ public class CreditInstituteTest {
     }
 
     @Test
-    public void testTimeoutFailure() throws Exception {
+    public void testNoFunctionalFailure() throws Exception {
         service.setFailurerate(0.0);
         service.setTimeoutrate(1.0);
         service.doPayment(null);

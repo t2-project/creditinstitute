@@ -1,37 +1,37 @@
 package de.unistuttgart.t2.creditinstitute;
 
 import java.util.Random;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
+ * Fakes the payment.
+ * 
+ * <p>
  * Probabilities for failure and timeouts, disregarding all network delay, are
  * as follows:
- * 
+ * <p>
  * assuming the payment calls the provide with a timeout of t_max, then the
  * probability of a timeout is:
- * 
+ * <p>
  * p(timeout) = ((1 - failurerate) * timeoutrate) + p(random timeout)
- * 
+ * <p>
  * with: p(random timeout) = (1 - failurerate) * (1 - timeoutrate) * p (X > *
  * t_max)
- * 
+ * <p>
  * with: p(X > t_max) = ((timeout/2 - t_max) / timeout) iff timeout/2 >= t_max
  * or: p(X > t_max) = 0 otherwise
- * 
+ * <p>
  * the probability of a functional failure (HTTP response with status code 500
  * Internal Server Error) is equal to failurate.
  * 
- * both rates and the timeout can be adjusted via the respective http endpoints.
- * 
+ * <p>
+ * Both rates and the timeout duration can be adjusted via the respective http
+ * endpoints.
  * 
  * @author maumau
  *
  */
 public class CreditInstituteService {
-
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     private int timeout = 1000; // in ms
 
@@ -39,13 +39,16 @@ public class CreditInstituteService {
     private double timeoutrate = 0.1; // decimals
 
     /**
-     * fake execution of payment.
+     * Fake executes some payment.
      * 
-     * depending on failurerate, timeoutrate and timeout this methods result in an
-     * exception or delays up to timeout ms.
+     * Depending on {@link CreditInstituteService#failurerate failurerate},
+     * {@link CreditInstituteService#timeoutrate timeoutrate} and
+     * {@link CreditInstituteService#timeout timeout} this operation either throws
+     * an exception or delays up to {@link CreditInstituteService#timeoutrate
+     * timeoutrate} millisecondsa.
      * 
-     * @param data
-     * @throws Exception if a failure occurs
+     * @param data informations usually found on a credit card
+     * @throws Exception if anything 'failed'
      */
     public void doPayment(PaymentData data) throws Exception {
         if (new Random().nextDouble() < failurerate) {
@@ -59,14 +62,12 @@ public class CreditInstituteService {
         }
     }
 
-    public int getTimeout() {
-        return timeout;
-    }
-
     /**
-     * set new timeout duration
+     * Update the timeout duration.
      * 
-     * timeout must not be negative.
+     * <p>
+     * The new value must not be negative. If it is, the current value remains
+     * unchanged.
      * 
      * @param timeout duration of timeout in ms
      */
@@ -77,14 +78,12 @@ public class CreditInstituteService {
         this.timeout = timeout;
     }
 
-    public double getFailurerate() {
-        return failurerate;
-    }
-
     /**
-     * set new failurerate.
+     * Update the failure rate.
      * 
-     * failurerate must not be negative.
+     * <p>
+     * The new value must not be negative. If it is, the current value remains
+     * unchanged.
      * 
      * @param failurerate probability for failures as decimal
      */
@@ -95,14 +94,12 @@ public class CreditInstituteService {
         this.failurerate = failurerate;
     }
 
-    public double getTimeoutrate() {
-        return timeoutrate;
-    }
-
     /**
-     * set new timeoutrate.
+     * Update the timeout rate.
      * 
-     * timeoutrate must not be negative.
+     * <p>
+     * The new value must not be negative. If it is, the current value remains
+     * unchanged.
      * 
      * @param timeoutrate probability for timeouts as decimal
      */
@@ -111,5 +108,17 @@ public class CreditInstituteService {
             throw new IllegalArgumentException("timeout must not be negative");
         }
         this.timeoutrate = timeoutrate;
+    }
+
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public double getFailurerate() {
+        return failurerate;
+    }
+
+    public double getTimeoutrate() {
+        return timeoutrate;
     }
 }

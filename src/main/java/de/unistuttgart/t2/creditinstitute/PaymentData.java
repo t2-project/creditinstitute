@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * All the informations usually found on a creditcard.
- * <p>
- * part of the SagaData
- * 
+ * All the informations usually found on a credit card.
  * 
  * @author maumau
  *
@@ -23,12 +20,10 @@ public class PaymentData {
     private double total;
 
     public PaymentData() {
-        super();
     }
 
     @JsonCreator
     public PaymentData(String cardNumber, String cardOwner, String checksum, double total) {
-        super();
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.checksum = checksum;
