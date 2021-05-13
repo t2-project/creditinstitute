@@ -7,9 +7,9 @@ It is a dummy service to provide a payment functionality for the [Payment Servic
 The reply behaviour at runtime of the service's ``/pay`` endpoint may be changed at runtime. 
 
 
-## Build and Run Manually
+## Build and Run
 
-_**TODO: copy from Order was mangus checked it.**_
+Confer the [Documentation](https://t2-documentation.readthedocs.io/en/latest/guides/kube.html) on how to build, run or deploy the T2 Store services.
 
 
 ## HTTP Endpoints
