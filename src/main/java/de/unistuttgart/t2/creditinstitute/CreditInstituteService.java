@@ -56,7 +56,7 @@ public class CreditInstituteService {
         }
         if (new Random().nextDouble() < timeoutrate) {
             Thread.sleep(timeout);
-        } else {
+        } else if (timeout > 0){
             // random timeout
             Thread.sleep(new Random().nextInt(timeout / 2));
         }
