@@ -2,6 +2,9 @@ package de.unistuttgart.t2.creditinstitute;
 
 import java.util.Random;
 
+import de.unistuttgart.t2.creditinstitute.domain.PaymentData;
+import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
+
 /**
  * 
  * Fakes the payment.
@@ -45,14 +48,14 @@ public class CreditInstituteService {
      * {@link CreditInstituteService#timeoutrate timeoutrate} and
      * {@link CreditInstituteService#timeout timeout} this operation either throws
      * an exception or delays up to {@link CreditInstituteService#timeoutrate
-     * timeoutrate} millisecondsa.
+     * timeoutrate} milliseconds.
      * 
      * @param data informations usually found on a credit card
      * @throws Exception if anything 'failed'
      */
     public void doPayment(PaymentData data) throws Exception {
         if (new Random().nextDouble() < failurerate) {
-            throw new Exception("functional failure");
+            throw new PaymentFailedException("functional failure");
         }
         if (new Random().nextDouble() < timeoutrate) {
             Thread.sleep(timeout);
@@ -73,7 +76,7 @@ public class CreditInstituteService {
      */
     public void setTimeout(int timeout) {
         if (timeout < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("timeout must be positive");
         }
         this.timeout = timeout;
     }
@@ -89,7 +92,7 @@ public class CreditInstituteService {
      */
     public void setFailurerate(double failurerate) {
         if (failurerate < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("failurerate must be positive");
         }
         this.failurerate = failurerate;
     }
@@ -105,7 +108,7 @@ public class CreditInstituteService {
      */
     public void setTimeoutrate(double timeoutrate) {
         if (timeoutrate < 0) {
-            throw new IllegalArgumentException("timeout must not be negative");
+            throw new IllegalArgumentException("timeoutrate must be positive");
         }
         this.timeoutrate = timeoutrate;
     }

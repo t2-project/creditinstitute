@@ -1,11 +1,17 @@
 package de.unistuttgart.t2.creditinstitute;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import de.unistuttgart.t2.creditinstitute.domain.PaymentData;
+import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
 
 /**
  * Defines the endpoints of the credit institute.
@@ -39,13 +45,18 @@ public class CreditInstituteController {
      * @param timeout new timeout duration  
      * @return current timeout duration 
      */
-    @GetMapping("/timeout/{timeout}")
-    public int setTimeout(@PathVariable String timeout) {
+    @PostMapping("/timeout")
+    public int setTimeout(@RequestBody int timeout) {
         try {
-            service.setTimeout(Integer.valueOf(timeout));
+            service.setTimeout(timeout);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+        return service.getTimeout();
+    }
+    
+    @GetMapping("/timeout")
+    public int getTimeout() {
         return service.getTimeout();
     }
 
@@ -58,13 +69,18 @@ public class CreditInstituteController {
      * @param rate new failure rate
      * @return current failure rate
      */
-    @GetMapping("/failurerate/{rate}")
-    public double setFailurerate(@PathVariable String rate) {
+    @PostMapping("/failurerate")
+    public double setFailurerate(@RequestBody double rate) {
         try {
-            service.setFailurerate(Double.valueOf(rate));
+            service.setFailurerate(rate);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+        return service.getFailurerate();
+    }
+    
+    @GetMapping("/failurerate")
+    public double getFailurerate() {
         return service.getFailurerate();
     }
 
@@ -77,13 +93,42 @@ public class CreditInstituteController {
      * @param rate new timeout rate
      * @return current timeout rate
      */
-    @GetMapping("/timeoutrate/{rate}")
-    public double setTimeoutrate(@PathVariable String rate) {
+    @PostMapping("/timeoutrate")
+    public double setTimeoutrate(@RequestBody double rate) {
         try {
-            service.setTimeoutrate(Double.valueOf(rate));
+            service.setTimeoutrate(rate);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return service.getTimeoutrate();
+    }
+    
+    @GetMapping("/timeoutrate")
+    public double getTimeoutrate() {
+        return service.getTimeoutrate();
+    }
+    
+    /**
+     * Creates the response entity if serving a payment request failed.
+     * 
+     * @param exception
+     * @return a response entity with an exceptional message
+     */
+    @ExceptionHandler(PaymentFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<String> handlePaymentFailedException(PaymentFailedException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+    }
+    
+    /**
+     * Creates the response entity if setting the timeout or the rates failed.
+     * 
+     * @param exception
+     * @return a response entity with an exceptional message
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 }

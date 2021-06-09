@@ -1,4 +1,4 @@
-package de.unistuttgart.t2.creditinstitute;
+package de.unistuttgart.t2.creditinstitute.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
