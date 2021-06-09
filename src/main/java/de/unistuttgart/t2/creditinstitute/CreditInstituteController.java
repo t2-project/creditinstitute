@@ -47,11 +47,7 @@ public class CreditInstituteController {
      */
     @PostMapping("/timeout")
     public int setTimeout(@RequestBody int timeout) {
-        try {
-            service.setTimeout(timeout);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        service.setTimeout(timeout);
         return service.getTimeout();
     }
     
@@ -71,11 +67,8 @@ public class CreditInstituteController {
      */
     @PostMapping("/failurerate")
     public double setFailurerate(@RequestBody double rate) {
-        try {
-            service.setFailurerate(rate);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        service.setFailurerate(rate);
+        
         return service.getFailurerate();
     }
     
@@ -95,11 +88,8 @@ public class CreditInstituteController {
      */
     @PostMapping("/timeoutrate")
     public double setTimeoutrate(@RequestBody double rate) {
-        try {
-            service.setTimeoutrate(rate);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        service.setTimeoutrate(rate);
+        
         return service.getTimeoutrate();
     }
     

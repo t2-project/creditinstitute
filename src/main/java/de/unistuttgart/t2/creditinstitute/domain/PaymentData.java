@@ -11,19 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class PaymentData {
     @JsonProperty("cardNumber")
-    private String cardNumber;
+    private final String cardNumber;
     @JsonProperty("cardOwner")
-    private String cardOwner;
+    private final String cardOwner;
     @JsonProperty("checksum")
-    private String checksum;
+    private final String checksum;
     @JsonProperty("total")
-    private double total;
-
-    public PaymentData() {
-    }
+    private final double total;
 
     @JsonCreator
-    public PaymentData(String cardNumber, String cardOwner, String checksum, double total) {
+    public PaymentData(final String cardNumber, final String cardOwner,final String checksum,final double total) {
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.checksum = checksum;
