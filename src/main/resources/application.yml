@@ -2,7 +2,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus
+        include: prometheus, health
     health:
       show-details: always
   metrics:
@@ -11,4 +11,18 @@ management:
     distribution:
       percentiles:
         all: 0.5, 0.75, 0.95, 0.98, 0.99, 0.999, 1.0
+  health:
+    probes:
+      enabled: true
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+
+opentracing:
+  jaeger:
+    service-name: creditinstitute
+    enabled: TRUE
+    udp-sender:
+      host: ${JAEGER_HOST}
 
