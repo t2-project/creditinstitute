@@ -14,22 +14,37 @@ Confer the [Documentation](https://t2-documentation.readthedocs.io/en/latest/gui
 
 ## HTTP Endpoints
 
-* ``/timeout/{timeout}`` GET to set the request delay to ``timeout`` (in ms)
-* ``/failurerate/{rate}`` GET to set failurerate to ``rate`` (as decimal)
-* ``/timeoutrate/{rate}`` GET to set timeoutrate to ``rate`` (as decimal)
+* ``/timeout`` timeout in ms
+* ``/failurerate`` probability of failure as decimal
+* ``/timeoutrate`` probability of timeout as decimal
 * ``/pay`` POST to execute fake payment. 
+
+ @PostMapping("/pay") @RequestBody PaymentData card)
+
+    @PostMapping("/timeout") @RequestBody int timeout) 
+
+
+    @PostMapping("/failurerate")  @RequestBody double rate) {
+    
+
+    
+    @PostMapping("/timeoutrate") @RequestBody double rate)
+    
+
+
+
 
 
 ## Usage
 
-Assuming the service runs at ``http://localhost:8087`` you can interact with it like this:
+Assuming the service runs as ``provider-cs`` you can interact with it like this:
 
 ### Request Payment
 
-The service answers request to this enpoint either with an Internal Server Error or delays the answer up to a specified timeout duration.
+The service answers request to this endpoint either with an Internal Server Error or delays the answer up to a specified timeout duration.
 
 ```
- curl -i -X POST -H "Content-Type:application/json" -d '{"cardNumber":"num","cardOwner":"own","checksum":"checksum","total":42}' http://localhost87/pay
+ curl -i -X POST -H "Content-Type:application/json" -d '{"cardNumber":"num","cardOwner":"own","checksum":"checksum","total":42}' provider-cs/pay
 ```
 
 ### Set the Failure Probability 
@@ -39,13 +54,13 @@ The failure probability defines how frequently the service responds with an Inte
 Set it to 0 to never answers (intentionally) with an Internal Server Error:
 
 ```
-curl http://localhost:8087/failurerate/0
+curl -i -X POST -H "Content-Type:application/json" -d 0  provider-cs/failurerate
 ```
 
 Set it to 1 (or greater) to always answers with an Internal Server Error. 
 
 ```
-curl http://localhost:8087/failurerate/1
+curl -i -X POST -H "Content-Type:application/json" -d 1  provider-cs/failurerate
 ```
 
 
@@ -56,23 +71,23 @@ The timeout probability defines how frequently the service waits for the full ti
 Set it to 1 (or greater) to delay all answers for the full timeout duration.
 
 ```
-curl http://localhost:8087/timeoutrate/1
+curl -i -X POST -H "Content-Type:application/json" -d 1  provider-cs/timeoutrate
 ```
 
 Set it to 0 to not delay answers full timeout duration.
 In this case the answer's delay is random but less than half of the specified timeout duration.
 
 ```
-curl http://localhost:8087/timeoutrate/0
+curl -i -X POST -H "Content-Type:application/json" -d 0  provider-cs/timeoutrate
 ```
 
 ### Set the Timeout Duration (in ms)
 
 The timeout duration is how long an answer is delayed in case of an intentional timeout.
-In case of a 'normal' answer ('normal' as in 'neither an intentional failure, nor an intentional timeout'), an answer's delay is random but alwasy less than half of the timeout duration.
+In case of a 'normal' answer ('normal' as in 'neither an intentional failure, nor an intentional timeout'), an answer's delay is random but always less than half of the timeout duration.
 
 
 request :
 ```
-curl http://localhost:8087/timeout/5000
+curl -i -X POST -H "Content-Type:application/json" -d 5000  provider-cs/timeout
 ```
