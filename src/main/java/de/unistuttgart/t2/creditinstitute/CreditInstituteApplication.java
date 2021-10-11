@@ -5,11 +5,15 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+
 /**
  * A dummy credit institute.
  * 
  * <p>
- * This credit institute provides a very fake payment.  
+ * This credit institute provides a very fake payment.
  * 
  * @author maumau
  *
@@ -25,5 +29,11 @@ public class CreditInstituteApplication {
     @Bean
     public CreditInstituteService service() {
         return new CreditInstituteService();
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI().components(new Components()).info(new Info().title("Creditinstitute service API")
+                .description("API of the T2 Store's creditinstitute service."));
     }
 }
