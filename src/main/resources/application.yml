@@ -19,10 +19,13 @@ management:
     readinessState:
       enabled: true
 
-opentracing:
-  jaeger:
-    service-name: creditinstitute
-    enabled: TRUE
-    udp-sender:
-      host: ${JAEGER_HOST}
+spring:
+  application:
+    name: creditinstitute
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1
+  zipkin:
+    baseUrl: ${ZIPKIN_BASEURL}
 
