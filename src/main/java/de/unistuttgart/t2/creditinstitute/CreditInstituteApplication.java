@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import de.unistuttgart.t2.common.BaseScan;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.models.info.Info;
  *
  */
 @EnableAutoConfiguration
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = BaseScan.class)
 public class CreditInstituteApplication {
 
     public static void main(String[] args) {
