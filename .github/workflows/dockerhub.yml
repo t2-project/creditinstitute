@@ -33,6 +33,8 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: '11'
+    - name: build common
+      run: cd common && ./mvnw clean install
     - name: verify credit institute
       run: ./mvnw clean install
     - run: |
