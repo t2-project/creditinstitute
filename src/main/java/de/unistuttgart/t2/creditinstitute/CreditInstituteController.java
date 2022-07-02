@@ -20,7 +20,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
  * Defines the endpoints of the credit institute.
  * 
  * @author maumau
- *
  */
 @RestController
 public class CreditInstituteController {
@@ -31,13 +30,13 @@ public class CreditInstituteController {
     /**
      * Fakes performs some payment.
      * 
-     * @param card informations usually found on a credit card 
+     * @param card informations usually found on a credit card
      * @throws Exception if anything 'failed'
      */
     @Operation(summary = "Does Payment", description = "Does Payment for provided data", tags = { "..." })
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Payment successful"),
-            @ApiResponse(responseCode = "500", description = "Payment failed") })
+                            @ApiResponse(responseCode = "200", description = "Payment successful"),
+                            @ApiResponse(responseCode = "500", description = "Payment failed") })
     @PostMapping("/pay")
     public void doPayment(@RequestBody PaymentData card) throws Exception {
         service.doPayment(card);
@@ -45,12 +44,11 @@ public class CreditInstituteController {
 
     /**
      * Updated and get the timeout duration.
-     * 
-     * <p> 
+     * <p>
      * If the parameter cannot be processed, the timeout remains unchanged.
      * 
-     * @param timeout new timeout duration  
-     * @return current timeout duration 
+     * @param timeout new timeout duration
+     * @return current timeout duration
      */
     @Operation(summary = "Set timeout duration", description = "Set timeout duration")
     @PostMapping("/timeout")
@@ -58,7 +56,7 @@ public class CreditInstituteController {
         service.setTimeout(timeout);
         return service.getTimeout();
     }
-    
+
     @Operation(summary = "Get timeout duration", description = "Get timeout duration")
     @GetMapping("/timeout")
     public int getTimeout() {
@@ -67,8 +65,7 @@ public class CreditInstituteController {
 
     /**
      * Updated and get the failure rate.
-     * 
-     * <p> 
+     * <p>
      * If the parameter cannot be processed, the rate remains unchanged.
      * 
      * @param rate new failure rate
@@ -78,10 +75,10 @@ public class CreditInstituteController {
     @PostMapping("/failurerate")
     public double setFailurerate(@RequestBody double rate) {
         service.setFailurerate(rate);
-        
+
         return service.getFailurerate();
     }
-    
+
     @Operation(summary = "Get failurerate", description = "Get failurerate")
     @GetMapping("/failurerate")
     public double getFailurerate() {
@@ -90,8 +87,7 @@ public class CreditInstituteController {
 
     /**
      * Updated and get the timeout rate.
-     * 
-     * <p> 
+     * <p>
      * If the parameter cannot be processed, the rate remains unchanged.
      * 
      * @param rate new timeout rate
@@ -101,16 +97,16 @@ public class CreditInstituteController {
     @PostMapping("/timeoutrate")
     public double setTimeoutrate(@RequestBody double rate) {
         service.setTimeoutrate(rate);
-        
+
         return service.getTimeoutrate();
     }
-    
+
     @Operation(summary = "Get timeoutrate", description = "Get timeoutrate")
     @GetMapping("/timeoutrate")
     public double getTimeoutrate() {
         return service.getTimeoutrate();
     }
-    
+
     /**
      * Creates the response entity if serving a payment request failed.
      * 
@@ -122,7 +118,7 @@ public class CreditInstituteController {
     public ResponseEntity<String> handlePaymentFailedException(PaymentFailedException exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
-    
+
     /**
      * Creates the response entity if setting the timeout or the rates failed.
      * 

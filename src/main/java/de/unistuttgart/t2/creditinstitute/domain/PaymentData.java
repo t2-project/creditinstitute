@@ -7,9 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * All the informations usually found on a credit card.
  * 
  * @author maumau
- *
  */
 public class PaymentData {
+
     @JsonProperty("cardNumber")
     private final String cardNumber;
     @JsonProperty("cardOwner")
@@ -20,7 +20,7 @@ public class PaymentData {
     private final double total;
 
     @JsonCreator
-    public PaymentData(final String cardNumber, final String cardOwner,final String checksum,final double total) {
+    public PaymentData(final String cardNumber, final String cardOwner, final String checksum, final double total) {
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.checksum = checksum;

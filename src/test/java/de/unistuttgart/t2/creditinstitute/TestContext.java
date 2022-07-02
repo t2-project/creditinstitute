@@ -9,9 +9,10 @@ import io.opentracing.contrib.java.spring.jaeger.starter.JaegerAutoConfiguration
 import io.opentracing.contrib.spring.web.starter.ServerTracingAutoConfiguration;
 
 @Configuration
-@EnableAutoConfiguration(exclude = {ServerTracingAutoConfiguration.class, JaegerAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = { ServerTracingAutoConfiguration.class, JaegerAutoConfiguration.class })
 @Profile("test")
 public class TestContext {
+
     @Bean
     public CreditInstituteService service() {
         return new CreditInstituteService();
