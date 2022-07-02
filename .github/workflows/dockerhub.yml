@@ -1,8 +1,5 @@
 name: build and push docker image
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -28,6 +25,11 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: check out credit institute
       uses: actions/checkout@v2
+    - name: check out common
+      uses: actions/checkout@master
+      with:
+        repository: t2-project/common
+        path: './common'
     - name: set up jdk
       uses: actions/setup-java@v2
       with:
