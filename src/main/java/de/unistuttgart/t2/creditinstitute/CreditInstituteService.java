@@ -6,33 +6,24 @@ import de.unistuttgart.t2.creditinstitute.domain.PaymentData;
 import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
 
 /**
- * 
  * Fakes the payment.
- * 
  * <p>
- * Probabilities for failure and timeouts, disregarding all network delay, are
- * as follows:
+ * Probabilities for failure and timeouts, disregarding all network delay, are as follows:
  * <p>
- * assuming the payment calls the provide with a timeout of t_max, then the
- * probability of a timeout is:
+ * assuming the payment calls the provide with a timeout of t_max, then the probability of a timeout is:
  * <p>
  * p(timeout) = ((1 - failurerate) * timeoutrate) + p(random timeout)
  * <p>
- * with: p(random timeout) = (1 - failurerate) * (1 - timeoutrate) * p (X > *
- * t_max)
+ * with: p(random timeout) = (1 - failurerate) * (1 - timeoutrate) * p (X > * t_max)
  * <p>
- * with: p(X > t_max) = ((timeout/2 - t_max) / timeout) iff timeout/2 >= t_max
- * or: p(X > t_max) = 0 otherwise
+ * with: p(X > t_max) = ((timeout/2 - t_max) / timeout) iff timeout/2 >= t_max or: p(X > t_max) = 0 otherwise
  * <p>
- * the probability of a functional failure (HTTP response with status code 500
- * Internal Server Error) is equal to failurate.
- * 
+ * the probability of a functional failure (HTTP response with status code 500 Internal Server Error) is equal to
+ * failurate.
  * <p>
- * Both rates and the timeout duration can be adjusted via the respective http
- * endpoints.
+ * Both rates and the timeout duration can be adjusted via the respective http endpoints.
  * 
  * @author maumau
- *
  */
 public class CreditInstituteService {
 
@@ -42,13 +33,10 @@ public class CreditInstituteService {
     private double timeoutrate = 0.1; // decimals
 
     /**
-     * Fake executes some payment.
-     * 
-     * Depending on {@link CreditInstituteService#failurerate failurerate},
-     * {@link CreditInstituteService#timeoutrate timeoutrate} and
-     * {@link CreditInstituteService#timeout timeout} this operation either throws
-     * an exception or delays up to {@link CreditInstituteService#timeoutrate
-     * timeoutrate} milliseconds.
+     * Fake executes some payment. Depending on {@link CreditInstituteService#failurerate failurerate},
+     * {@link CreditInstituteService#timeoutrate timeoutrate} and {@link CreditInstituteService#timeout timeout} this
+     * operation either throws an exception or delays up to {@link CreditInstituteService#timeoutrate timeoutrate}
+     * milliseconds.
      * 
      * @param data informations usually found on a credit card
      * @throws Exception if anything 'failed'
@@ -59,7 +47,7 @@ public class CreditInstituteService {
         }
         if (new Random().nextDouble() < timeoutrate) {
             Thread.sleep(timeout);
-        } else if (timeout > 0){
+        } else if (timeout > 0) {
             // random timeout
             Thread.sleep(new Random().nextInt(timeout / 2));
         }
@@ -67,10 +55,8 @@ public class CreditInstituteService {
 
     /**
      * Update the timeout duration.
-     * 
      * <p>
-     * The new value must not be negative. If it is, the current value remains
-     * unchanged.
+     * The new value must not be negative. If it is, the current value remains unchanged.
      * 
      * @param timeout duration of timeout in ms
      */
@@ -83,10 +69,8 @@ public class CreditInstituteService {
 
     /**
      * Update the failure rate.
-     * 
      * <p>
-     * The new value must not be negative. If it is, the current value remains
-     * unchanged.
+     * The new value must not be negative. If it is, the current value remains unchanged.
      * 
      * @param failurerate probability for failures as decimal
      */
@@ -99,10 +83,8 @@ public class CreditInstituteService {
 
     /**
      * Update the timeout rate.
-     * 
      * <p>
-     * The new value must not be negative. If it is, the current value remains
-     * unchanged.
+     * The new value must not be negative. If it is, the current value remains unchanged.
      * 
      * @param timeoutrate probability for timeouts as decimal
      */
