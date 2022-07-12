@@ -15,15 +15,15 @@ import io.swagger.v3.oas.annotations.responses.*;
  * @author maumau
  */
 @RestController
-public class CreditInstituteController {
+public final class CreditInstituteController {
 
     @Autowired
     CreditInstituteService service;
 
     /**
-     * Fakes performs some payment.
+     * Fake-performs some payment.
      *
-     * @param card informations usually found on a credit card
+     * @param card information usually found on a credit card
      * @throws Exception if anything 'failed'
      */
     @Operation(summary = "Does Payment", description = "Does Payment for provided data", tags = { "..." })
@@ -36,21 +36,21 @@ public class CreditInstituteController {
     }
 
     /**
-     * Updated and get the timeout duration.
+     * Update and get the timeout duration.
      * <p>
      * If the parameter cannot be processed, the timeout remains unchanged.
      *
      * @param timeout new timeout duration
      * @return current timeout duration
      */
-    @Operation(summary = "Set timeout duration", description = "Set timeout duration")
+    @Operation(summary = "Set timeout duration")
     @PostMapping("/timeout")
     public int setTimeout(@RequestBody int timeout) {
         service.setTimeout(timeout);
         return service.getTimeout();
     }
 
-    @Operation(summary = "Get timeout duration", description = "Get timeout duration")
+    @Operation(summary = "Get timeout duration")
     @GetMapping("/timeout")
     public int getTimeout() {
         return service.getTimeout();
@@ -72,7 +72,7 @@ public class CreditInstituteController {
         return service.getFailurerate();
     }
 
-    @Operation(summary = "Get failurerate", description = "Get failurerate")
+    @Operation(summary = "Get failurerate")
     @GetMapping("/failurerate")
     public double getFailurerate() {
         return service.getFailurerate();
@@ -94,33 +94,21 @@ public class CreditInstituteController {
         return service.getTimeoutrate();
     }
 
-    @Operation(summary = "Get timeoutrate", description = "Get timeoutrate")
+    @Operation(summary = "Get timeoutrate")
     @GetMapping("/timeoutrate")
     public double getTimeoutrate() {
         return service.getTimeoutrate();
     }
 
     /**
-     * Creates the response entity if serving a payment request failed.
+     * Creates the response entity if serving a payment request or setting the timeout/ rates failed.
      *
-     * @param exception
+     * @param exception the exception that was thrown
      * @return a response entity with an exceptional message
      */
-    @ExceptionHandler(PaymentFailedException.class)
+    @ExceptionHandler({ PaymentFailedException.class, IllegalArgumentException.class })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> handlePaymentFailedException(PaymentFailedException exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
-    }
-
-    /**
-     * Creates the response entity if setting the timeout or the rates failed.
-     *
-     * @param exception
-     * @return a response entity with an exceptional message
-     */
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
 }

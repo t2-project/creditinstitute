@@ -38,7 +38,7 @@ public class CreditInstituteService {
      * operation either throws an exception or delays up to {@link CreditInstituteService#timeoutrate timeoutrate}
      * milliseconds.
      * 
-     * @param data informations usually found on a credit card
+     * @param data information usually found on a credit card
      * @throws Exception if anything 'failed'
      */
     public void doPayment(PaymentData data) throws Exception {
