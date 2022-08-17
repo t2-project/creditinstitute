@@ -18,7 +18,9 @@ management:
       enabled: true
     readinessState:
       enabled: true
-
+      
+trace: false
+ 
 opentracing:
   jaeger:
     service-name: creditinstitute
