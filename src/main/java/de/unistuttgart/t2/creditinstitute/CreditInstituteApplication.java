@@ -16,7 +16,7 @@ import io.swagger.v3.oas.models.info.Info;
  * @author maumau
  */
 @EnableAutoConfiguration
-@SpringBootApplication(scanBasePackageClasses = BaseScan.class)
+@SpringBootApplication(scanBasePackageClasses = { BaseScan.class, CreditInstituteApplication.class })
 public class CreditInstituteApplication {
 
     public static void main(String[] args) {
