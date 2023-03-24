@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 @EnableAutoConfiguration(exclude = {ZipkinAutoConfiguration.class})
 @Profile("test")
 public class TestContext {
+
     @Bean
     public CreditInstituteService service() {
         return new CreditInstituteService();

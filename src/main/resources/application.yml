@@ -29,3 +29,4 @@ spring:
   zipkin:
     baseUrl: ${ZIPKIN_BASEURL}
 
+

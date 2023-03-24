@@ -1,15 +1,14 @@
 package de.unistuttgart.t2.creditinstitute.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 /**
- * All the informations usually found on a credit card.
- * 
- * @author maumau
+ * All the information usually found on a credit card.
  *
+ * @author maumau
  */
-public class PaymentData {
+public final class PaymentData {
+
     @JsonProperty("cardNumber")
     private final String cardNumber;
     @JsonProperty("cardOwner")
@@ -20,7 +19,7 @@ public class PaymentData {
     private final double total;
 
     @JsonCreator
-    public PaymentData(final String cardNumber, final String cardOwner,final String checksum,final double total) {
+    public PaymentData(final String cardNumber, final String cardOwner, final String checksum, final double total) {
         this.cardNumber = cardNumber;
         this.cardOwner = cardOwner;
         this.checksum = checksum;
