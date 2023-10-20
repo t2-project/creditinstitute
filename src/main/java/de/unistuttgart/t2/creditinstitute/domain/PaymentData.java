@@ -1,6 +1,7 @@
 package de.unistuttgart.t2.creditinstitute.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * All the information usually found on a credit card.

@@ -1,13 +1,14 @@
 package de.unistuttgart.t2.creditinstitute;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
-
 import de.unistuttgart.t2.creditinstitute.domain.PaymentData;
 import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.*;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Defines the endpoints of the credit institute.

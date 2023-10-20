@@ -1,15 +1,17 @@
 package de.unistuttgart.t2.creditinstitute;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.*;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Tests for the {@link de.unistuttgart.t2.creditinstitute.CreditInstituteService CreditInstituteService}.
