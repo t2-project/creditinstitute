@@ -8,4 +8,4 @@ The reply behavior at runtime of the service's `/pay` endpoint may be changed at
 
 ## Build and Run
 
-Refer to the [Documentation](https://t2-documentation.readthedocs.io/en/latest/guides/deploy.html) on how to build, run or deploy and use the T2-Project services.
+Refer to the [Documentation](https://t2-documentation.readthedocs.io/en/latest/microservices/deploy.html) on how to build, run or deploy and use the T2-Project services.
