@@ -10,7 +10,7 @@ import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
  * <p>
  * Probabilities for failure and timeouts, disregarding all network delay, are as follows:
  * <p>
- * assuming the payment calls the provide with a timeout of t_max, then the probability of a timeout is:
+ * assuming the payment calls the provider with a timeout of t_max, then the probability of a timeout is:
  * <p>
  * p(timeout) = ((1 - failurerate) * timeoutrate) + p(random timeout)
  * <p>
@@ -19,7 +19,7 @@ import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
  * with: p(X > t_max) = ((timeout/2 - t_max) / timeout) iff timeout/2 >= t_max or: p(X > t_max) = 0 otherwise
  * <p>
  * the probability of a functional failure (HTTP response with status code 500 Internal Server Error) is equal to
- * failurate.
+ * failurerate.
  * <p>
  * Both rates and the timeout duration can be adjusted via the respective http endpoints.
  * 
