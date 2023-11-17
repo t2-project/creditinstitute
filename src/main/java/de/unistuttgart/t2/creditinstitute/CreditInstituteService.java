@@ -43,7 +43,7 @@ public class CreditInstituteService {
      */
     public void doPayment(PaymentData data) throws Exception {
         if (new Random().nextDouble() < failurerate) {
-            throw new PaymentFailedException("functional failure");
+            throw new PaymentFailedException("credit institute functional failure");
         }
         if (new Random().nextDouble() < timeoutrate) {
             Thread.sleep(timeout);

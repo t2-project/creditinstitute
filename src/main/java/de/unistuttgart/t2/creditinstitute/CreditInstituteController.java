@@ -108,7 +108,7 @@ public final class CreditInstituteController {
      */
     @ExceptionHandler({ PaymentFailedException.class, IllegalArgumentException.class })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<String> handlePaymentFailedException(PaymentFailedException exception) {
+    public ResponseEntity<String> handlePaymentFailedException(Exception exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
     }
 }
