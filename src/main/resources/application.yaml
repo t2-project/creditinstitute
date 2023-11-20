@@ -1,3 +1,7 @@
+info:
+  app:
+    version: '@project.version@'
+
 management:
   endpoints:
     web:
@@ -24,7 +28,7 @@ trace: false
 opentracing:
   jaeger:
     service-name: creditinstitute
-    enabled: TRUE
+    enabled: ${T2_JAEGER_ENABLED}
     udp-sender:
-      host: ${JAEGER_HOST}
+      host: ${T2_JAEGER_HOST}
 
