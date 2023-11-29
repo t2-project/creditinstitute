@@ -1,9 +1,9 @@
 package de.unistuttgart.t2.creditinstitute;
 
-import java.util.Random;
-
 import de.unistuttgart.t2.creditinstitute.domain.PaymentData;
 import de.unistuttgart.t2.creditinstitute.exceptions.PaymentFailedException;
+
+import java.util.Random;
 
 /**
  * Fakes the payment.
