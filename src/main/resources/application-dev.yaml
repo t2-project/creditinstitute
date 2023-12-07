@@ -1,0 +1,16 @@
+### CREDIT INSTITUTE
+# Dev profile (other services have to be started locally)
+
+server:
+  port: 8087
+
+opentracing:
+  jaeger:
+    service-name: creditinstitute
+    enabled: false
+    udp-sender:
+      host: localhost
+
+logging:
+  level:
+    de.unistuttgart.t2: DEBUG
