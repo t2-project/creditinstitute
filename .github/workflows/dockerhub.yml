@@ -39,5 +39,6 @@ jobs:
     - name: Docker build and push (manual)
       run: |
         echo ${{ env.RELEASE_VERSION }}
+        cd ./creditinstitute
         docker build -t t2project/creditinstitute:${{ env.RELEASE_VERSION }} .
         docker push t2project/creditinstitute:${{ env.RELEASE_VERSION }}
